@@ -3,7 +3,7 @@ version: '3.8'
 services:
   merchandise_service:
     build: .
-    hostname: merchandise_service
+    hostname: merchandise-service
     ports:
       - "8080:80"
       
