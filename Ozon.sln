@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ozon.MerchandiseService", "src\Ozon.MerchandiseService\Ozon.MerchandiseService.csproj", "{77A9C35A-00CF-4012-82C7-2EEA51EEC86A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ozon.MerchandiseServiceApi", "src\Ozon.MerchandiseServiceApi\Ozon.MerchandiseServiceApi.csproj", "{77A9C35A-00CF-4012-82C7-2EEA51EEC86A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3034B2D3-1F4C-4C1C-A2F8-A4AD22FFA72B}"
 EndProject
@@ -11,8 +11,6 @@ ProjectSection(SolutionItems) = preProject
 EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A766FCFD-64C2-43C9-BC49-E32AAC6FEEF9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ozon.MerchandiseService", "Ozon.MerchandiseService", "{DA7C31F1-A4EC-4BFB-BA57-6434CDE26EBA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{2A516C48-785A-45DA-8534-B2F0B84EC98A}"
 ProjectSection(SolutionItems) = preProject
@@ -33,6 +31,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DA7C31F1-A4EC-4BFB-BA57-6434CDE26EBA} = {3034B2D3-1F4C-4C1C-A2F8-A4AD22FFA72B}
-		{77A9C35A-00CF-4012-82C7-2EEA51EEC86A} = {DA7C31F1-A4EC-4BFB-BA57-6434CDE26EBA}
+		{77A9C35A-00CF-4012-82C7-2EEA51EEC86A} = {3034B2D3-1F4C-4C1C-A2F8-A4AD22FFA72B}
 	EndGlobalSection
 EndGlobal

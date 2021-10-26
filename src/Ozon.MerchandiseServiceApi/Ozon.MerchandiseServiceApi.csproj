@@ -2,6 +2,5 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>Ozon.MerchandiseService</RootNamespace>
   </PropertyGroup>
 </Project>
