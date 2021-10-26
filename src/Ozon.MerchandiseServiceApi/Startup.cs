@@ -20,7 +20,8 @@ namespace Ozon.MerchandiseServiceApi
             app.UseRouting();
             app.UseMiddleware<RequestResponseLoggingMiddleware>();
             app.Map("/version", builder => builder.UseMiddleware<VersionMiddleware>());
-           
+            app.Map("/live", builder => builder.UseMiddleware<LiveMiddleware>());
+            app.Map("/ready", builder => builder.UseMiddleware<ReadyMiddleware>());
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

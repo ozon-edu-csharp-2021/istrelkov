@@ -20,6 +20,7 @@ namespace Ozon.MerchandiseServiceApi.Infrastructure.Middlewares
 
         public async Task InvokeAsync(HttpContext context)
         {
+            //TODO исключить GRPC
             await LogRequest(context);
             await LogResponse(context);
         }

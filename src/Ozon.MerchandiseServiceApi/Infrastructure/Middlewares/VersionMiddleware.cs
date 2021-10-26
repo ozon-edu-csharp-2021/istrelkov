@@ -15,8 +15,8 @@ namespace Ozon.MerchandiseServiceApi.Infrastructure.Middlewares
         public async Task InvokeAsync(HttpContext context)
         {
             var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "no version";
-            await context.Response.WriteAsync(version);
-            await _next.Invoke(context);
+            var serviceName = Assembly.GetExecutingAssembly().GetName().Name?.ToString() ?? "no name";
+            await context.Response.WriteAsync($"Version:{version}, ServiceName:{serviceName}");
         }
         
     }
