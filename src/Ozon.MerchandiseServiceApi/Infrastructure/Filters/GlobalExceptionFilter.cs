@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -11,7 +12,8 @@ namespace Ozon.MerchandiseServiceApi.Infrastructure.Filters
             var resultObject = new
             {
                 ExceptionType = context.Exception.GetType().FullName,
-                Message = context.Exception.Message
+                Message = context.Exception.Message,
+                StackTrace=context.Exception.StackTrace
             };
 
             var jsonResult = new JsonResult(resultObject)
