@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
-namespace Ozon.MerchandiseServiceApi.Infrastructure.Middlewares
+namespace Ozon.MerchApi.Infrastructure.Middlewares
 {
     public class VersionMiddleware
     { 
@@ -14,9 +14,13 @@ namespace Ozon.MerchandiseServiceApi.Infrastructure.Middlewares
 
         public async Task InvokeAsync(HttpContext context)
         {
-            var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "no version";
-            var serviceName = Assembly.GetExecutingAssembly().GetName().Name?.ToString() ?? "no name";
-            await context.Response.WriteAsync($"Version:{version}, ServiceName:{serviceName}");
+            var json = new
+            {
+                version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "no version",
+                serviceName = Assembly.GetExecutingAssembly().GetName().Name
+            };           
+           
+            await context.Response.WriteAsJsonAsync(json);
         }
         
     }

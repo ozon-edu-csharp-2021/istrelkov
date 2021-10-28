@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 
-namespace Ozon.MerchandiseServiceApi.Infrastructure.Middlewares
+namespace Ozon.MerchApi.Infrastructure.Middlewares
 {
     public class RequestResponseLoggingMiddleware
     {
@@ -20,7 +20,11 @@ namespace Ozon.MerchandiseServiceApi.Infrastructure.Middlewares
 
         public async Task InvokeAsync(HttpContext context)
         {
-            //TODO исключить GRPC
+            if (context.Request.ContentType.Contains("grpc"))
+            {
+                await _next(context);
+                return;
+            }
             await LogRequest(context);
             await LogResponse(context);
         }
@@ -32,13 +36,13 @@ namespace Ozon.MerchandiseServiceApi.Infrastructure.Middlewares
             context.Response.Body = newBody;
 
             await _next(context);
-            
+
             foreach (var header in context.Response.Headers)
             {
                 _logger.LogInformation("Response headers logged");
                 _logger.LogInformation($"{header.Key}:{header.Value}");
             }
-            
+
             try
             {
                 newBody.Seek(0, SeekOrigin.Begin);
@@ -51,9 +55,6 @@ namespace Ozon.MerchandiseServiceApi.Infrastructure.Middlewares
             {
                 _logger.LogError(e, "Could not log request body");
             }
-
-
-        
         }
 
         private async Task LogRequest(HttpContext context)

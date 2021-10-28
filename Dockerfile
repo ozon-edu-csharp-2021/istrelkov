@@ -2,19 +2,19 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 as build
 
 WORKDIR /src
 
-COPY ["src/Ozon.MerchandiseService/Ozon.MerchandiseService.csproj",  "src/"]
+COPY ["src/Ozon.MerchApi/Ozon.MerchApi.csproj",  "src/"]
 
-RUN dotnet restore "src/Ozon.MerchandiseService.csproj"
+RUN dotnet restore "src/Ozon.MerchApi.csproj"
 
 COPY . .
 
-WORKDIR /src/src/Ozon.MerchandiseService
+WORKDIR /src/src/Ozon.MerchApi
 
-RUN dotnet build "Ozon.MerchandiseService.csproj" -c Release -o /app/build
+RUN dotnet build "Ozon.MerchApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
 
-RUN dotnet publish "Ozon.MerchandiseService.csproj" -c Release -o /app/publish
+RUN dotnet publish "Ozon.MerchApi.csproj" -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 as runtime
 
@@ -24,6 +24,6 @@ EXPOSE 80
 
 COPY --from=publish /app/publish .
 
-ENTRYPOINT [ "dotnet", "Ozon.MerchandiseService.dll" ]
+ENTRYPOINT [ "dotnet", "Ozon.MerchApi.dll" ]
 
 
