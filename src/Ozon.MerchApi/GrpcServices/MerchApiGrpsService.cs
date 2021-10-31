@@ -14,24 +14,24 @@ namespace Ozon.MerchApi.GrpcServices
             _merchandiseService = merchandiseService;
         }
 
-        public override async Task<GetMerchResponse> GetMerch(GetMerchRequest request, ServerCallContext context)
+        public override async Task<CheckWasIssuedMerchResponse> CheckWasIssuedMerch(CheckWasIssuedMerchRequest request,
+            ServerCallContext context)
         {
-            var response = await _merchandiseService.GetMerch(request.EmloyeeId, context.CancellationToken);
+            var response = await _merchandiseService.CheckWasIssuedMerch(request.EmployeeId, context.CancellationToken);
 
-            return new GetMerchResponse()
+            return new CheckWasIssuedMerchResponse()
             {
-                EmloyeeId = response.EmployeerId,
-                IsIssued = response.IsIssued
+                EmployeeId = response.EmployeeId,
+                WasIssued = response.WasIssued
             };
         }
 
-        public override async Task<GetMerchResponse> GetInfo(GetMerchRequest request, ServerCallContext context)
+        public override async Task<IssueMerchResponse> IssueMerch(IssueMerchRequest request, ServerCallContext context)
         {
-            var response = await _merchandiseService.GetMerch(request.EmloyeeId, context.CancellationToken);
-            return new GetMerchResponse()
+            var response = await _merchandiseService.IssueMerch(request.EmployeeId, context.CancellationToken);
+            return new IssueMerchResponse
             {
-                EmloyeeId = response.EmployeerId,
-                IsIssued = response.IsIssued
+                EmployeeId = response.EmployeeId,
             };
         }
     }

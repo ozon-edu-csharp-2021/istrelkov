@@ -17,18 +17,18 @@ namespace Ozon.MerchApi.Controllers
         }
 
         [HttpGet]
-        [Route("api/merchandise/{id}/merch")]
+        [Route("api/merchandise/{id}/issue")]
         public async Task<IActionResult> GetMerch(int id, CancellationToken token)
         {
-            var response = await _service.GetMerch(id, token);
+            var response = await _service.IssueMerch(id, token);
             return Ok(response);
         }
 
         [HttpGet]
-        [Route("api/merchandise/{id}/info")]
+        [Route("api/merchandise/{id}/issue-info")]
         public async Task<IActionResult> GetInfo(int id, CancellationToken token)
         {
-            var response = await _service.GetInfo(id, token);
+            var response = await _service.CheckWasIssuedMerch(id, token);
             return Ok(response);
         }
     }

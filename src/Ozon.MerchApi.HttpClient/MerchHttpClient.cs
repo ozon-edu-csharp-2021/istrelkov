@@ -6,13 +6,6 @@ using System.Threading.Tasks;
 
 namespace Ozon.MerchApi.HttpClients
 {
-    public interface IMerchHttpClient
-    {
-        Task<MerchResponse> GetMerch(MerchRequest merchRequest, CancellationToken token);
-
-        Task<MerchResponse> GetInfo(MerchRequest merchRequest, CancellationToken token);
-    }
-
     public class MerchHttpClient : IMerchHttpClient
     {
         private readonly HttpClient _httpClient;
@@ -22,18 +15,22 @@ namespace Ozon.MerchApi.HttpClients
             _httpClient = httpClient;
         }
 
-        public async Task<MerchResponse> GetMerch(MerchRequest merchRequest, CancellationToken token)
+        public async Task<IssueMerchResponse> IssueMerch(IssueMerchRequest issueMerchRequest, CancellationToken token)
         {
-            using var response = await _httpClient.GetAsync($"api/merchandise/{merchRequest.EmployeerId}/merch/", token);
+            using var response =
+                await _httpClient.GetAsync($"api/merchandise/{issueMerchRequest.EmployeeId}/issue/", token);
             var body = await response.Content.ReadAsStringAsync(token);
-            return JsonSerializer.Deserialize<MerchResponse>(body);
+            return JsonSerializer.Deserialize<IssueMerchResponse>(body);
         }
 
-        public async Task<MerchResponse> GetInfo(MerchRequest merchRequest, CancellationToken token)
+        public async Task<CheckWasIssuedMerchResponse> CheckWasIssuedMerch(
+            CheckWasIssuedMerchRequest checkWasIssuedMerchRequest, CancellationToken token)
         {
-            using var response = await _httpClient.GetAsync($"api/merchandise/{ merchRequest.EmployeerId}/info/", token);
+            using var response =
+                await _httpClient.GetAsync($"api/merchandise/{checkWasIssuedMerchRequest.EmployeeId}/issue-info/",
+                    token);
             var body = await response.Content.ReadAsStringAsync(token);
-            return JsonSerializer.Deserialize<MerchResponse>(body);
+            return JsonSerializer.Deserialize<CheckWasIssuedMerchResponse>(body);
         }
     }
 }

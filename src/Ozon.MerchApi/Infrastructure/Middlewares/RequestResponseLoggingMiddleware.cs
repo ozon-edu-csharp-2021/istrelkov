@@ -20,7 +20,7 @@ namespace Ozon.MerchApi.Infrastructure.Middlewares
 
         public async Task InvokeAsync(HttpContext context)
         {
-            if (context.Request.ContentType.Contains("grpc"))
+            if (context.Request.ContentType!=null && context.Request.ContentType.Contains("grpc"))
             {
                 await _next(context);
                 return;

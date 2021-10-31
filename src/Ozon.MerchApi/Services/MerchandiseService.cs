@@ -8,16 +8,14 @@ namespace Ozon.MerchApi.Services
 {
     public class MerchandiseService : IMerchandiseService
     {
-        public async Task<MerchResponse> GetInfo(int id, CancellationToken token)
+        public async Task<IssueMerchResponse> IssueMerch(long id, CancellationToken token)
         {
-            await Task.Yield();
-            return new MerchResponse(id, true);
+            return await Task.FromResult(new IssueMerchResponse(id));
         }
 
-        public async Task<MerchResponse> GetMerch(int id, CancellationToken token)
+        public async Task<CheckWasIssuedMerchResponse> CheckWasIssuedMerch(long id, CancellationToken token)
         {
-            await Task.Yield();
-            return new MerchResponse(id, true);
+            return await Task.FromResult(new CheckWasIssuedMerchResponse(id));
         }
     }
 }

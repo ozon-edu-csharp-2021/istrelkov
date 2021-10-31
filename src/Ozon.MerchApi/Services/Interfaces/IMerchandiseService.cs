@@ -7,8 +7,7 @@ namespace Ozon.MerchApi.Services.Interfaces
 {
     public interface IMerchandiseService
     {
-        Task<MerchResponse> GetMerch(int id, CancellationToken token);
-
-        Task<MerchResponse> GetInfo(int id, CancellationToken token);
+        Task<IssueMerchResponse> IssueMerch(long id, CancellationToken token);
+        Task<CheckWasIssuedMerchResponse> CheckWasIssuedMerch(long id, CancellationToken token);
     }
 }
