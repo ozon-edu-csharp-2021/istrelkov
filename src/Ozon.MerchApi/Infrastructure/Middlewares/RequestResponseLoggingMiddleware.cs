@@ -36,10 +36,9 @@ namespace Ozon.MerchApi.Infrastructure.Middlewares
             context.Response.Body = newBody;
 
             await _next(context);
-
+            _logger.LogInformation("Response headers logged");
             foreach (var header in context.Response.Headers)
-            {
-                _logger.LogInformation("Response headers logged");
+            {            
                 _logger.LogInformation($"{header.Key}:{header.Value}");
             }
 
@@ -59,9 +58,9 @@ namespace Ozon.MerchApi.Infrastructure.Middlewares
 
         private async Task LogRequest(HttpContext context)
         {
+            _logger.LogInformation("Request headers logged");
             foreach (var header in context.Response.Headers)
-            {
-                _logger.LogInformation("Request headers logged");
+            {           
                 _logger.LogInformation($"{header.Key}:{header.Value}");
             }
 
@@ -81,7 +80,7 @@ namespace Ozon.MerchApi.Infrastructure.Middlewares
                     await context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
                     var bodyAsText = Encoding.UTF8.GetString(buffer);
                     _logger.LogInformation("Request logged");
-                    _logger.LogInformation($"Request Body:bodyAsText");
+                    _logger.LogInformation($"Request Body: {bodyAsText}");
 
                     context.Request.Body.Position = 0;
                 }
