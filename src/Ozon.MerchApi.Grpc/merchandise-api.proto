@@ -1,0 +1,26 @@
+﻿syntax = "proto3";
+option csharp_namespace = "Ozon.MerchApi.Grpc";
+package MerchApi;
+
+service MerchApiGrpc
+{
+	rpc IssueMerch (IssueMerchRequest) returns (IssueMerchResponse);
+	rpc CheckWasIssuedMerch (CheckWasIssuedMerchRequest) returns (CheckWasIssuedMerchResponse);
+}
+
+message IssueMerchRequest {
+int64 employee_id = 1;
+}
+
+message IssueMerchResponse {
+int64 employee_id = 1;
+}
+
+message CheckWasIssuedMerchRequest {
+int64 employee_id = 1;
+}
+
+message CheckWasIssuedMerchResponse {
+int64 employee_id = 1;
+bool was_issued = 2;
+}

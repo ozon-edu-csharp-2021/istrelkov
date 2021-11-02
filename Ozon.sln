@@ -1,24 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ozon.MerchandiseService", "src\Ozon.MerchandiseService\Ozon.MerchandiseService.csproj", "{77A9C35A-00CF-4012-82C7-2EEA51EEC86A}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ozon.MerchApi", "src\Ozon.MerchApi\Ozon.MerchApi.csproj", "{77A9C35A-00CF-4012-82C7-2EEA51EEC86A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3034B2D3-1F4C-4C1C-A2F8-A4AD22FFA72B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{36DF2D13-3EEE-484E-B785-7A476F750A4F}"
-ProjectSection(SolutionItems) = preProject
-	.gitignore = .gitignore
-	README.md = README.md
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A766FCFD-64C2-43C9-BC49-E32AAC6FEEF9}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ozon.MerchandiseService", "Ozon.MerchandiseService", "{DA7C31F1-A4EC-4BFB-BA57-6434CDE26EBA}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{2A516C48-785A-45DA-8534-B2F0B84EC98A}"
-ProjectSection(SolutionItems) = preProject
-	docker-compose.yml = docker-compose.yml
-	Dockerfile = Dockerfile
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ozon.MerchApi.HttpClients", "src\Ozon.MerchApi.HttpClient\Ozon.MerchApi.HttpClients.csproj", "{697DDE41-A8B2-4B58-82A9-0BE6757A2C9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ozon.MerchApi.Grpc", "src\Ozon.MerchApi.Grpc\Ozon.MerchApi.Grpc.csproj", "{C8D0FB4D-9EC2-41E4-8170-BFDF80D113D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,9 +35,24 @@ Global
 		{77A9C35A-00CF-4012-82C7-2EEA51EEC86A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77A9C35A-00CF-4012-82C7-2EEA51EEC86A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77A9C35A-00CF-4012-82C7-2EEA51EEC86A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{697DDE41-A8B2-4B58-82A9-0BE6757A2C9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{697DDE41-A8B2-4B58-82A9-0BE6757A2C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{697DDE41-A8B2-4B58-82A9-0BE6757A2C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{697DDE41-A8B2-4B58-82A9-0BE6757A2C9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8D0FB4D-9EC2-41E4-8170-BFDF80D113D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8D0FB4D-9EC2-41E4-8170-BFDF80D113D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8D0FB4D-9EC2-41E4-8170-BFDF80D113D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8D0FB4D-9EC2-41E4-8170-BFDF80D113D5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{DA7C31F1-A4EC-4BFB-BA57-6434CDE26EBA} = {3034B2D3-1F4C-4C1C-A2F8-A4AD22FFA72B}
-		{77A9C35A-00CF-4012-82C7-2EEA51EEC86A} = {DA7C31F1-A4EC-4BFB-BA57-6434CDE26EBA}
+		{77A9C35A-00CF-4012-82C7-2EEA51EEC86A} = {3034B2D3-1F4C-4C1C-A2F8-A4AD22FFA72B}
+		{697DDE41-A8B2-4B58-82A9-0BE6757A2C9B} = {3034B2D3-1F4C-4C1C-A2F8-A4AD22FFA72B}
+		{C8D0FB4D-9EC2-41E4-8170-BFDF80D113D5} = {3034B2D3-1F4C-4C1C-A2F8-A4AD22FFA72B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {94492AF3-60CB-456F-AB2F-15377D25CEDA}
 	EndGlobalSection
 EndGlobal
