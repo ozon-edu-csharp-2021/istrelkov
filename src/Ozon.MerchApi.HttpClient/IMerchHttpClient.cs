@@ -1,6 +1,6 @@
-﻿using System.Threading;
+﻿using Ozon.MerchApi.HttpModels;
+using System.Threading;
 using System.Threading.Tasks;
-using Ozon.MerchApi.Models;
 
 namespace Ozon.MerchApi.HttpClients
 {
@@ -8,7 +8,7 @@ namespace Ozon.MerchApi.HttpClients
     {
         Task<IssueMerchResponse> IssueMerch(IssueMerchRequest issueMerchRequest, CancellationToken token);
 
-        Task<CheckWasIssuedMerchResponse> CheckWasIssuedMerch(CheckWasIssuedMerchRequest checkWasIssuedMerchRequest,
+        Task<GetMerchOrdersResponse> CheckWasIssuedMerch(GetMerchOrdersResponse checkWasIssuedMerchRequest,
             CancellationToken token);
     }
 }

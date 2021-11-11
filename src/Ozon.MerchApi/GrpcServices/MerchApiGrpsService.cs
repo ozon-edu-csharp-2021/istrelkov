@@ -17,12 +17,10 @@ namespace Ozon.MerchApi.GrpcServices
         public override async Task<CheckWasIssuedMerchResponse> CheckWasIssuedMerch(CheckWasIssuedMerchRequest request,
             ServerCallContext context)
         {
-            var response = await _merchandiseService.CheckWasIssuedMerch(request.EmployeeId, context.CancellationToken);
+            var response = await _merchandiseService.GetMerchOrders(request.EmployeeId, context.CancellationToken);
 
             return new CheckWasIssuedMerchResponse()
             {
-                EmployeeId = response.EmployeeId,
-                WasIssued = response.WasIssued
             };
         }
 
