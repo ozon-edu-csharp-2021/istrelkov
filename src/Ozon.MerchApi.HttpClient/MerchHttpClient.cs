@@ -25,7 +25,7 @@ namespace Ozon.MerchApi.HttpClients
         }
 
         public async Task<GetMerchOrdersResponse> CheckWasIssuedMerch(
-            GetMerchOrdersResponse checkWasIssuedMerchRequest, CancellationToken token)
+            GetMerchOrdersRequest checkWasIssuedMerchRequest, CancellationToken token)
         {
             using var response =
                 await _httpClient.PostAsJsonAsync($"api/merchandise/issue-info/", checkWasIssuedMerchRequest, token);

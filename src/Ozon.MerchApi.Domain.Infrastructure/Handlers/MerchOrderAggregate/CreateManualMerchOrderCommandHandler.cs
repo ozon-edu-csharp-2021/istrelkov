@@ -25,7 +25,8 @@ namespace Ozon.MerchApi.Domain.Infrastructure.Handlers.MerchOrderAggregate
         private readonly IStockApiService _stockApiService;
         private readonly IEmailService _emailService;
 
-        public CreateManualMerchOrderCommandHandler(IMerchOrderRepository stockItemRepository,
+        public CreateManualMerchOrderCommandHandler(
+                                              IMerchOrderRepository stockItemRepository,
                                               IMerchPackRepository merchPackRepository,
                                               IStockApiService stockApiService,
                                               IEmailService emailService)
@@ -48,11 +49,13 @@ namespace Ozon.MerchApi.Domain.Infrastructure.Handlers.MerchOrderAggregate
 
             MerchPack merchPack = await _merchPackRepository.FindByTypeAsync(merchPackType, cancellationToken);
 
+            IEnumerable<long> merchPackItems = merchPack.ItemPackCollection.Select(ip => ip.StockItem.Value).ToHashSet();
+
             List<StockItemResponse> stockItems = await _stockApiService.GetAll(cancellationToken);
 
-            stockItems = stockItems.Where(i =>
-            merchPack.ItemPackCollection.Select(ip => ip.StockItem.Value).Contains(i.Id)
-            && (i.ClothingSize is null || i.ClothingSize == request.ClothingSize)).ToList();
+            Dictionary<long, StockItemResponse> stockItemsById = stockItems
+                .Where(i => merchPackItems.Contains(i.Id) && (i.ClothingSize is null || i.ClothingSize == request.ClothingSize))
+                .ToDictionary(i => i.Id);
 
             bool isEnough = true;
 
@@ -60,7 +63,8 @@ namespace Ozon.MerchApi.Domain.Infrastructure.Handlers.MerchOrderAggregate
 
             foreach (ItemPack itemPack in merchPack.ItemPackCollection)
             {
-                StockItemResponse stockItem = stockItems.First(si => si.Id == itemPack.StockItem.Value);
+                stockItemsById.TryGetValue(itemPack.StockItem.Value, out StockItemResponse stockItem);           
+
                 if (itemPack.Quantity.Value <= stockItem.Quantity)
                 {
                     isEnough = false;
@@ -80,8 +84,8 @@ namespace Ozon.MerchApi.Domain.Infrastructure.Handlers.MerchOrderAggregate
                 if (isReserved)
                 {
                     merchOrder.Reserve();
-                    bool isSended = await _emailService.SendMail(request.EmployeeId, cancellationToken);
-                    if (isSended)
+                    bool isSent = await _emailService.SendMail(request.EmployeeId, cancellationToken);
+                    if (isSent)
                     {
                         merchOrder.Done();
                     }

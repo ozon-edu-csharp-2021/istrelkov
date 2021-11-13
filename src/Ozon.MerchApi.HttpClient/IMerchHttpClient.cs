@@ -8,7 +8,7 @@ namespace Ozon.MerchApi.HttpClients
     {
         Task<IssueMerchResponse> IssueMerch(IssueMerchRequest issueMerchRequest, CancellationToken token);
 
-        Task<GetMerchOrdersResponse> CheckWasIssuedMerch(GetMerchOrdersResponse checkWasIssuedMerchRequest,
+        Task<GetMerchOrdersResponse> CheckWasIssuedMerch(GetMerchOrdersRequest checkWasIssuedMerchRequest,
             CancellationToken token);
     }
 }

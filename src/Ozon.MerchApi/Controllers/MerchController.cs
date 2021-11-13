@@ -4,7 +4,8 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Ozon.MerchApi.Domain.AggregationModels.MerchOrderAggregate;
-using Ozon.MerchApi.Domain.Infrastructure.Commands.GetMerchOrders;
+using Ozon.MerchApi.Domain.Infrastructure.Queries.GetMerchOrders;
+using Ozon.MerchApi.Domain.Infrastructure.ResponseModels;
 using Ozon.MerchApi.HttpModels;
 using Ozon.MerchApi.Services.Interfaces;
 
@@ -35,16 +36,16 @@ namespace Ozon.MerchApi.Controllers
         [Route("api/merchandise/issue-info")]
         public async Task<IActionResult> GetInfo(IssueMerchRequest request, CancellationToken token)
         {
-            GetMerchOrdersCommand command = new() { EmployeeId = request.EmployeeId };
+            GetMerchOrdersQuery query = new() { EmployeeId = request.EmployeeId };
 
-            List<MerchOrder> merchOrders = await _mediator.Send(command, token);
+            MerchOrdersQueryResponse queryResponse  = await _mediator.Send(query, token);
 
             GetMerchOrdersResponse response = new()
             {
                 MerchOrders = new List<MerchOrderViewModel>()
             };
 
-            foreach (MerchOrder merchOrder in merchOrders)
+            foreach (MerchOrder merchOrder in queryResponse.MerchOrders)
             {
                 response.MerchOrders.Add(new MerchOrderViewModel()
                 {

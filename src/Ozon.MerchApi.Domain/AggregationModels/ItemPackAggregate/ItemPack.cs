@@ -5,7 +5,7 @@ using Ozon.MerchApi.Domain.Models;
 
 namespace Ozon.MerchApi.Domain.AggregationModels.ItemPackAggregate
 {
-    public class ItemPack : Entity
+    public class ItemPack : Entity, IAggregationRoot
     {
         public Quantity Quantity { get; private set; }
         public StockItem StockItem { get; }

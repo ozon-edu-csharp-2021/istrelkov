@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Ozon.MerchApi.Domain.AggregationModels.MerchPackAggregate
 {
-    public class MerchPack : Entity
+    public class MerchPack : Entity, IAggregationRoot
     {
         public IReadOnlyList<ItemPack> ItemPackCollection { get; }
 

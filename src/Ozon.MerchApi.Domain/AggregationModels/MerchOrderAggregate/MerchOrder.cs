@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Ozon.MerchApi.Domain.AggregationModels.MerchOrderAggregate
 {
-    public class MerchOrder : Entity
+    public class MerchOrder : Entity, IAggregationRoot
     {
         public DateAt DoneAt { get; private set; }
 

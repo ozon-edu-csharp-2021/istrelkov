@@ -12,7 +12,7 @@ namespace Ozon.MerchApi.Domain.Infrastructure.Extensions
         {
             services.AddMediatR(
                 typeof(CreateManualMerchOrderCommandHandler).Assembly,
-                typeof(GetMerchOrdersCommandHandler).Assembly);
+                typeof(GetMerchOrdersQueryHandler).Assembly);
 
             return services;
         }

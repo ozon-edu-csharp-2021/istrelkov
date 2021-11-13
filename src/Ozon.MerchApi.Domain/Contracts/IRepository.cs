@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using Ozon.MerchApi.Domain.Models;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Ozon.MerchApi.Domain.Contracts
@@ -7,7 +8,7 @@ namespace Ozon.MerchApi.Domain.Contracts
     /// Базовый интерфейс репозитория
     /// </summary>
     /// <typeparam name="TAggregationRoot">Объект сущности для управления</typeparam>
-    public interface IRepository<TAggregationRoot>
+    public interface IRepository<TAggregationRoot> where TAggregationRoot: IAggregationRoot
     {
         /// <summary>
         /// Объект <see cref="IUnitOfWork"/>
