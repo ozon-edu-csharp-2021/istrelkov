@@ -1,5 +1,6 @@
-﻿using Ozon.MerchApi.Models;
+﻿using Ozon.MerchApi.HttpModels;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,14 +24,13 @@ namespace Ozon.MerchApi.HttpClients
             return JsonSerializer.Deserialize<IssueMerchResponse>(body);
         }
 
-        public async Task<CheckWasIssuedMerchResponse> CheckWasIssuedMerch(
-            CheckWasIssuedMerchRequest checkWasIssuedMerchRequest, CancellationToken token)
+        public async Task<GetMerchOrdersResponse> CheckWasIssuedMerch(
+            GetMerchOrdersRequest checkWasIssuedMerchRequest, CancellationToken token)
         {
             using var response =
-                await _httpClient.GetAsync($"api/merchandise/{checkWasIssuedMerchRequest.EmployeeId}/issue-info/",
-                    token);
+                await _httpClient.PostAsJsonAsync($"api/merchandise/issue-info/", checkWasIssuedMerchRequest, token);
             var body = await response.Content.ReadAsStringAsync(token);
-            return JsonSerializer.Deserialize<CheckWasIssuedMerchResponse>(body);
+            return JsonSerializer.Deserialize<GetMerchOrdersResponse>(body);
         }
     }
 }

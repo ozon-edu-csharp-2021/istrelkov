@@ -1,15 +1,14 @@
-﻿using System.Net;
-using System.Reflection;
+﻿using Microsoft.AspNetCore.Http;
+using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace Ozon.MerchApi.Infrastructure.Middlewares
 {
-    public class LiveMiddleware
+    public class ReadyMiddleware
     {
         private readonly RequestDelegate _next;
 
-        public LiveMiddleware(RequestDelegate next)
+        public ReadyMiddleware(RequestDelegate next)
         {
             _next = next;
         }

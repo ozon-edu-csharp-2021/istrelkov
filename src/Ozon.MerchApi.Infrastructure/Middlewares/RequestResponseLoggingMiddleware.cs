@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 
 namespace Ozon.MerchApi.Infrastructure.Middlewares
 {
@@ -20,7 +20,7 @@ namespace Ozon.MerchApi.Infrastructure.Middlewares
 
         public async Task InvokeAsync(HttpContext context)
         {
-            if (context.Request.ContentType!=null && context.Request.ContentType.Contains("grpc"))
+            if (context.Request.ContentType != null && context.Request.ContentType.Contains("grpc"))
             {
                 await _next(context);
                 return;
@@ -38,7 +38,7 @@ namespace Ozon.MerchApi.Infrastructure.Middlewares
             await _next(context);
             _logger.LogInformation("Response headers logged");
             foreach (var header in context.Response.Headers)
-            {            
+            {
                 _logger.LogInformation($"{header.Key}:{header.Value}");
             }
 
@@ -60,7 +60,7 @@ namespace Ozon.MerchApi.Infrastructure.Middlewares
         {
             _logger.LogInformation("Request headers logged");
             foreach (var header in context.Response.Headers)
-            {           
+            {
                 _logger.LogInformation($"{header.Key}:{header.Value}");
             }
 

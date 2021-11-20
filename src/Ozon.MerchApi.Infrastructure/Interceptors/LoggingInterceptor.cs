@@ -1,8 +1,8 @@
-﻿using System.Text.Json;
-using System.Threading.Tasks;
-using Grpc.Core;
+﻿using Grpc.Core;
 using Grpc.Core.Interceptors;
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Ozon.MerchApi.Infrastructure.Interceptors
 {
@@ -21,12 +21,12 @@ namespace Ozon.MerchApi.Infrastructure.Interceptors
         {
             var requestJson = JsonSerializer.Serialize(request);
             _logger.LogInformation(requestJson);
-            
+
             var response = base.UnaryServerHandler(request, context, continuation);
 
             var responseJson = JsonSerializer.Serialize(response);
             _logger.LogInformation(responseJson);
-            
+
             return response;
         }
     }
