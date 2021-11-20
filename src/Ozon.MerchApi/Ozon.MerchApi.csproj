@@ -11,8 +11,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Ozon.MerchApi.Domain.Infrastructure\Ozon.MerchApi.Domain.Infrastructure.csproj" />
+		<ProjectReference Include="..\Ozon.MerchApi.Domain\Ozon.MerchApi.Domain.csproj" />
 		<ProjectReference Include="..\Ozon.MerchApi.Grpc\Ozon.MerchApi.Grpc.csproj" />
 		<ProjectReference Include="..\Ozon.MerchApi.HttpModels\Ozon.MerchApi.HttpModels.csproj" />
 		<ProjectReference Include="..\Ozon.MerchApi.Infrastructure\Ozon.MerchApi.Infrastructure.csproj" />
+		<ProjectReference Include="..\Ozon.MerchApi.Migrator\Ozon.MerchApi.Migrator.csproj" />
 	</ItemGroup>
 </Project>

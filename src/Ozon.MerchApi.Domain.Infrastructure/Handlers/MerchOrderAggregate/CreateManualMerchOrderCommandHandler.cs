@@ -18,29 +18,34 @@ using System.Threading.Tasks;
 
 namespace Ozon.MerchApi.Domain.Infrastructure.Handlers.MerchOrderAggregate
 {
-    public class CreateManualMerchOrderCommandHandler : IRequestHandler<CreateManualMerchOrderCommand, int>
+    public class CreateManualMerchOrderCommandHandler : IRequestHandler<CreateManualMerchOrderCommand, MerchOrder>
     {
         private readonly IMerchOrderRepository _merchOrderRepository;
+        private readonly ISkuPackRepository _skuPackRepository;
         private readonly IMerchPackRepository _merchPackRepository;
         private readonly IStockApiService _stockApiService;
         private readonly IEmailService _emailService;
 
         public CreateManualMerchOrderCommandHandler(
-                                              IMerchOrderRepository stockItemRepository,
-                                              IMerchPackRepository merchPackRepository,
-                                              IStockApiService stockApiService,
-                                              IEmailService emailService)
+            IMerchOrderRepository stockItemRepository,
+            ISkuPackRepository skuPackRepository,
+            IMerchPackRepository merchPackRepository,
+            IStockApiService stockApiService,
+            IEmailService emailService)
         {
             _merchOrderRepository = stockItemRepository;
+            _skuPackRepository = skuPackRepository;
             _merchPackRepository = merchPackRepository;
             _stockApiService = stockApiService;
             _emailService = emailService;
         }
 
-        public async Task<int> Handle(CreateManualMerchOrderCommand request, CancellationToken cancellationToken)
+        public async Task<MerchOrder> Handle(CreateManualMerchOrderCommand request, CancellationToken cancellationToken)
         {
-            MerchOrder merchOrder = await _merchOrderRepository.FindIssuedMerchAsync(request.EmployeeId, request.MerchPackId, cancellationToken);
-            if (merchOrder is not null)
+            List<MerchOrder> merchOrders = await _merchOrderRepository
+                 .FindIssuedMerchAsync(request.EmployeeId, request.MerchPackId, cancellationToken);
+
+            if (merchOrders.Count > 0)
             {
                 throw new Exception($"Merch has already been issued");
             }
@@ -72,11 +77,11 @@ namespace Ozon.MerchApi.Domain.Infrastructure.Handlers.MerchOrderAggregate
                 skuPacks.Add(new SkuPack(new Sku(stockItem.Sku), itemPack.Quantity));
             }
 
-            merchOrder = new MerchOrder(
-                request.EmployeeId,
-                skuPacks,
+            MerchOrder merchOrder = new(
+                merchPackType,
                 MerchRequestType.Manual,
-                merchPackType);
+                request.EmployeeId,
+                skuPacks);
 
             if (isEnough)
             {
@@ -93,8 +98,9 @@ namespace Ozon.MerchApi.Domain.Infrastructure.Handlers.MerchOrderAggregate
             }
 
             merchOrder = await _merchOrderRepository.CreateAsync(merchOrder, cancellationToken);
+            await _skuPackRepository.CreateAsync(merchOrder, cancellationToken);
 
-            return merchOrder.Id;
+            return merchOrder;
         }
     }
 }

@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Ozon.MerchApi.Domain.AggregationModels.MerchOrderAggregate;
+using Ozon.MerchApi.Domain.Infrastructure.Commands.CreateMerchOrder;
 using Ozon.MerchApi.Domain.Infrastructure.Queries.GetMerchOrders;
 using Ozon.MerchApi.Domain.Infrastructure.ResponseModels;
 using Ozon.MerchApi.HttpModels;
+using Ozon.MerchApi.HttpModels.Helpers;
+using Ozon.MerchApi.Infrastructure.Extensions;
 using Ozon.MerchApi.Services.Interfaces;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Ozon.MerchApi.Controllers
 {
@@ -24,39 +26,38 @@ namespace Ozon.MerchApi.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-        [Route("api/merchandise/{id}/issue")]
-        public async Task<IActionResult> GetMerch(int id, CancellationToken token)
+        [HttpPost("get-merch-orders")]
+        public async Task<ActionResult<GetMerchOrdersResponse>> GetMerchOrders(GetMerchOrdersRequest request, CancellationToken token)
         {
-            var response = await _service.IssueMerch(id, token);
+            GetMerchOrdersQuery command = new()
+            {
+                EmployeeId = request.EmployeeId
+            };
+
+            MerchOrdersQueryResponse merchOrdersQueryResponse = await _mediator.Send(command, token);
+            GetMerchOrdersResponse response = new()
+            {
+                MerchOrders = merchOrdersQueryResponse.MerchOrders.Map(entity => HttpModelsMapper.MerchOrderToViewModel(entity))
+            };
+
             return Ok(response);
         }
 
-        [HttpPost]
-        [Route("api/merchandise/issue-info")]
-        public async Task<IActionResult> GetInfo(IssueMerchRequest request, CancellationToken token)
+        [HttpPost("issue-merch")]
+        public async Task<ActionResult<IssueMerchResponse>> IssueMerch(IssueMerchRequest request, CancellationToken token)
         {
-            GetMerchOrdersQuery query = new() { EmployeeId = request.EmployeeId };
-
-            MerchOrdersQueryResponse queryResponse  = await _mediator.Send(query, token);
-
-            GetMerchOrdersResponse response = new()
+            CreateManualMerchOrderCommand command = new()
             {
-                MerchOrders = new List<MerchOrderViewModel>()
+                EmployeeId = request.EmployeeId,
+                ClothingSize = request.ClothingSize,
+                MerchPackId = request.MerchPackId,
             };
 
-            foreach (MerchOrder merchOrder in queryResponse.MerchOrders)
+            MerchOrder merchOrder = await _mediator.Send(command, token);
+            IssueMerchResponse response = new()
             {
-                response.MerchOrders.Add(new MerchOrderViewModel()
-                {
-                    DoneAt = merchOrder.DoneAt.Value,
-                    RequestType = merchOrder.RequestType.Name,
-                    EmployeeId = merchOrder.EmployeeId,
-                    ReserveAt = merchOrder.ReserveAt.Value,
-                    Status = merchOrder.Status.Name,
-                    Type = merchOrder.Type.Name,
-                });
-            }
+                MerchOrder = HttpModelsMapper.MerchOrderToViewModel(merchOrder)
+            };
 
             return Ok(response);
         }
