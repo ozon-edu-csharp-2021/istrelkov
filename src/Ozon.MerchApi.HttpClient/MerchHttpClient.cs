@@ -19,16 +19,16 @@ namespace Ozon.MerchApi.HttpClients
         public async Task<IssueMerchResponse> IssueMerch(IssueMerchRequest issueMerchRequest, CancellationToken token)
         {
             using var response =
-                await _httpClient.GetAsync($"api/merchandise/{issueMerchRequest.EmployeeId}/issue/", token);
+                await _httpClient.PostAsJsonAsync($"issue-merch", issueMerchRequest, token);
             var body = await response.Content.ReadAsStringAsync(token);
             return JsonSerializer.Deserialize<IssueMerchResponse>(body);
         }
 
         public async Task<GetMerchOrdersResponse> CheckWasIssuedMerch(
-            GetMerchOrdersRequest checkWasIssuedMerchRequest, CancellationToken token)
+            int employeeId, CancellationToken token)
         {
             using var response =
-                await _httpClient.PostAsJsonAsync($"api/merchandise/issue-info/", checkWasIssuedMerchRequest, token);
+                await _httpClient.GetAsync($"get-merch-orders/{employeeId}", token);
             var body = await response.Content.ReadAsStringAsync(token);
             return JsonSerializer.Deserialize<GetMerchOrdersResponse>(body);
         }
