@@ -10,7 +10,7 @@ namespace Ozon.MerchApi.HttpModels
 
         public long EmployeeId { get; set; }
 
-        public DateTimeOffset InWorkAt { get; }
+        public DateTimeOffset InWorkAt { get; set; }
 
         public string RequestType { get; set; }
 

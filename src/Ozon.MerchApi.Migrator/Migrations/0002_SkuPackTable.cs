@@ -9,10 +9,10 @@ namespace Ozon.MerchApi.Migrator.Migrations
         {
             Create
                 .Table("sku_pack")
-                .WithColumn("Id").AsInt64().Identity().PrimaryKey()
-                .WithColumn("MerchOrder_id").AsInt64().NotNullable()
-                .WithColumn("Sku_id").AsInt64().NotNullable()
-                .WithColumn("Quantity").AsInt32().NotNullable();
+                .WithColumn("id").AsInt64().Identity().PrimaryKey()
+                .WithColumn("merch_order_id").AsInt64().NotNullable()
+                .WithColumn("sku_id").AsInt64().NotNullable()
+                .WithColumn("quantity").AsInt32().NotNullable();
         }
 
         public override void Down()

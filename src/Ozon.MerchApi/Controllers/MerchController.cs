@@ -26,12 +26,12 @@ namespace Ozon.MerchApi.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("get-merch-orders")]
-        public async Task<ActionResult<GetMerchOrdersResponse>> GetMerchOrders(GetMerchOrdersRequest request, CancellationToken token)
+        [HttpGet("get-merch-orders/{employeeId}")]
+        public async Task<ActionResult<GetMerchOrdersResponse>> GetMerchOrders(int employeeId, CancellationToken token)
         {
             GetMerchOrdersQuery command = new()
             {
-                EmployeeId = request.EmployeeId
+                EmployeeId = employeeId
             };
 
             MerchOrdersQueryResponse merchOrdersQueryResponse = await _mediator.Send(command, token);

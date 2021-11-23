@@ -1,6 +1,6 @@
 using FluentMigrator;
 
-namespace Ozon.StockApi.Migrator.Temp
+namespace Ozon.MerchApi.Migrator.Migrations
 {
     [Migration(8)]
     public class FillDictionaries : ForwardOnlyMigration

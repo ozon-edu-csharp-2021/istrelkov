@@ -9,8 +9,8 @@ namespace Ozon.MerchApi.Migrator.Migrations
         {
             Create
                 .Table("merch_pack_type")
-                .WithColumn("Id").AsInt32().Identity().PrimaryKey()
-                .WithColumn("Name").AsString().NotNullable();
+                .WithColumn("id").AsInt32().Identity().PrimaryKey()
+                .WithColumn("name").AsString().NotNullable();
         }
 
         public override void Down()

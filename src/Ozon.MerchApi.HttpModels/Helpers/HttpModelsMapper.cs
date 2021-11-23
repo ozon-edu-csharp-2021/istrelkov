@@ -10,8 +10,9 @@ namespace Ozon.MerchApi.HttpModels.Helpers
             {
                 DoneAt = merchOrder.DoneAt.Value,
                 RequestType = merchOrder.RequestType.Name,
-                EmployeeId = merchOrder.EmployeeId,
+                EmployeeId = merchOrder.EmployeeId,                
                 ReserveAt = merchOrder.ReserveAt.Value,
+                InWorkAt = merchOrder.InWorkAt.Value,
                 Status = merchOrder.Status.Name,
                 Type = merchOrder.PackType.Name,
             };
