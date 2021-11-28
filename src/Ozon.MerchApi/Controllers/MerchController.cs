@@ -15,6 +15,7 @@ namespace Ozon.MerchApi.Controllers
 {
     [ApiController]
     [Produces("application/json")]
+    [Route("api/merchandise")]
     public class MerchandiseController : ControllerBase
     {
         private IMerchandiseService _service;
@@ -26,32 +27,24 @@ namespace Ozon.MerchApi.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("get-merch-orders/{employeeId}")]
+        [HttpGet("employee/{employeeId}/orders")]
         public async Task<ActionResult<GetMerchOrdersResponse>> GetMerchOrders(int employeeId, CancellationToken token)
         {
-            GetMerchOrdersQuery command = new()
-            {
-                EmployeeId = employeeId
-            };
-
+            GetMerchOrdersQuery command = new(employeeId);
+      
             MerchOrdersQueryResponse merchOrdersQueryResponse = await _mediator.Send(command, token);
             GetMerchOrdersResponse response = new()
             {
-                MerchOrders = merchOrdersQueryResponse.MerchOrders.Map(entity => HttpModelsMapper.MerchOrderToViewModel(entity))
+                MerchOrders = merchOrdersQueryResponse.MerchOrders.Map(HttpModelsMapper.MerchOrderToViewModel)
             };
 
             return Ok(response);
         }
 
-        [HttpPost("issue-merch")]
+        [HttpPost]
         public async Task<ActionResult<IssueMerchResponse>> IssueMerch(IssueMerchRequest request, CancellationToken token)
         {
-            CreateManualMerchOrderCommand command = new()
-            {
-                EmployeeId = request.EmployeeId,
-                ClothingSize = request.ClothingSize,
-                MerchPackId = request.MerchPackId,
-            };
+            CreateManualMerchOrderCommand command = new(request.EmployeeId, request.ClothingSize, request.MerchPackId);
 
             MerchOrder merchOrder = await _mediator.Send(command, token);
             IssueMerchResponse response = new()

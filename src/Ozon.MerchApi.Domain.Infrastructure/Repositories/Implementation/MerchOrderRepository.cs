@@ -41,16 +41,17 @@ namespace Ozon.MerchApi.Domain.Infrastructure.Repositories.Implementation
                     ,done_at
                     ,employee_id
                 )
-                OUTPUT INSERTED.Id
                 VALUES (
-                    @PackType
-                    @Status
-                    @RequestType
-                    @InWorkAt
-                    @ReserveAt
-                    @DoneAt
+                    @PackType,
+                    @Status,
+                    @RequestType,
+                    @InWorkAt,
+                    @ReserveAt,
+                    @DoneAt,
                     @EmployeeId
-                );";
+                )
+                RETURNING merch_order.Id
+                ;";
 
             var parameters = new
             {

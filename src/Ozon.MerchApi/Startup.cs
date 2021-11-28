@@ -59,8 +59,7 @@ namespace Ozon.MerchApi
 
         static private void AddRepositories(IServiceCollection services)
         {
-            DefaultTypeMap.MatchNamesWithUnderscores = true;
-            services.AddScoped<IItemPackRepository, ItemPackRepository>();
+            DefaultTypeMap.MatchNamesWithUnderscores = true;    
             services.AddScoped<IMerchOrderRepository, MerchOrderRepository>();
             services.AddScoped<IMerchPackRepository, MerchPackRepository>();
             services.AddScoped<ISkuPackRepository, SkuPackRepository>();

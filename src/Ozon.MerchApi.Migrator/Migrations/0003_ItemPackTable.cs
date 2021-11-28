@@ -10,8 +10,8 @@ namespace Ozon.MerchApi.Migrator.Migrations
             Create
                 .Table("item_pack")
                 .WithColumn("id").AsInt64().Identity().PrimaryKey()
-                .WithColumn("merchPack_id").AsInt64().NotNullable()
-                .WithColumn("stockItem_id").AsInt64().NotNullable()
+                .WithColumn("merch_pack_id").AsInt64().NotNullable()
+                .WithColumn("stock_item_id").AsInt64().NotNullable()
                 .WithColumn("quantity").AsInt32().NotNullable();
         }
 

@@ -16,7 +16,7 @@ namespace Ozon.MerchApi.Domain.Infrastructure.Repositories.Implementation
 {
     public class MerchPackRepository : IMerchPackRepository
     {
-        private const int TIMEOUT = 5;
+        private const int Timeout = 5;
         private readonly IChangeTracker _changeTracker;
         private readonly IDbConnectionFactory<NpgsqlConnection> _dbConnectionFactory;
 
@@ -55,7 +55,7 @@ namespace Ozon.MerchApi.Domain.Infrastructure.Repositories.Implementation
             CommandDefinition commandDefinition = new(
                 sql,
                 parameters: parameters,
-                commandTimeout: TIMEOUT,
+                commandTimeout: Timeout,
                 cancellationToken: cancellationToken);
 
             GridReader reader = await connection.QueryMultipleAsync(commandDefinition);

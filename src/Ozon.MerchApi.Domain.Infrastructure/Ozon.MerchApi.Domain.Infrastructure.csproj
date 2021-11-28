@@ -13,11 +13,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Repositories" />
-		<Folder Include="Stubs\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\Ozon.MerchApi.Domain\Ozon.MerchApi.Domain.csproj" />
 		<ProjectReference Include="..\Ozon.MerchApi.HttpModels\Ozon.MerchApi.HttpModels.csproj" />
 		<ProjectReference Include="..\Ozon.MerchApi.Infrastructure\Ozon.MerchApi.Infrastructure.csproj" />
