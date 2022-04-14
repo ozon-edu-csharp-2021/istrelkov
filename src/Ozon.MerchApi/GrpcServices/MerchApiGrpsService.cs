@@ -29,7 +29,7 @@ namespace Ozon.MerchApi.GrpcServices
             var response = await _merchandiseService.IssueMerch(request.EmployeeId, context.CancellationToken);
             return new IssueMerchResponse
             {
-                EmployeeId = response.EmployeeId,
+                EmployeeId = response.MerchOrder.EmployeeId,
             };
         }
     }

@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{36DF2D13-3EEE-484E-B785-7A476F750A4F}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		entrypoint.sh = entrypoint.sh
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -25,15 +26,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ozon.MerchApi.HttpClients",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ozon.MerchApi.Grpc", "src\Ozon.MerchApi.Grpc\Ozon.MerchApi.Grpc.csproj", "{C8D0FB4D-9EC2-41E4-8170-BFDF80D113D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ozon.MerchApi.Domain", "src\Ozon.MerchApi.Domain\Ozon.MerchApi.Domain.csproj", "{126A82FF-87FA-4794-884C-2850F0A58A1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ozon.MerchApi.Domain", "src\Ozon.MerchApi.Domain\Ozon.MerchApi.Domain.csproj", "{126A82FF-87FA-4794-884C-2850F0A58A1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ozon.MerchApi.Domain.Infrastructure", "src\Ozon.MerchApi.Domain.Infrastructure\Ozon.MerchApi.Domain.Infrastructure.csproj", "{04A87745-7A0F-436B-9C77-90090CBF9CD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ozon.MerchApi.Domain.Infrastructure", "src\Ozon.MerchApi.Domain.Infrastructure\Ozon.MerchApi.Domain.Infrastructure.csproj", "{04A87745-7A0F-436B-9C77-90090CBF9CD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ozon.MerchApi.HttpModels", "src\Ozon.MerchApi.HttpModels\Ozon.MerchApi.HttpModels.csproj", "{3E30A185-A1E5-4986-BF53-332C35ABCB09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ozon.MerchApi.HttpModels", "src\Ozon.MerchApi.HttpModels\Ozon.MerchApi.HttpModels.csproj", "{3E30A185-A1E5-4986-BF53-332C35ABCB09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ozon.MerchApi.Infrastructure", "src\Ozon.MerchApi.Infrastructure\Ozon.MerchApi.Infrastructure.csproj", "{18BC816B-A02D-4F36-8FA4-CDB173D909F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ozon.MerchApi.Infrastructure", "src\Ozon.MerchApi.Infrastructure\Ozon.MerchApi.Infrastructure.csproj", "{18BC816B-A02D-4F36-8FA4-CDB173D909F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ozon.MerchApi.Domain.Tests", "tests\Ozon.MerchApi.Domain.Tests\Ozon.MerchApi.Domain.Tests.csproj", "{8B127929-FC38-41C2-98A5-0CE74A0F98D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ozon.MerchApi.Domain.Tests", "tests\Ozon.MerchApi.Domain.Tests\Ozon.MerchApi.Domain.Tests.csproj", "{8B127929-FC38-41C2-98A5-0CE74A0F98D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ozon.MerchApi.Migrator", "src\Ozon.MerchApi.Migrator\Ozon.MerchApi.Migrator.csproj", "{93B8BF9B-A286-45C1-AA8C-E8E935CC585F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +76,10 @@ Global
 		{8B127929-FC38-41C2-98A5-0CE74A0F98D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B127929-FC38-41C2-98A5-0CE74A0F98D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B127929-FC38-41C2-98A5-0CE74A0F98D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93B8BF9B-A286-45C1-AA8C-E8E935CC585F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93B8BF9B-A286-45C1-AA8C-E8E935CC585F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93B8BF9B-A286-45C1-AA8C-E8E935CC585F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93B8BF9B-A286-45C1-AA8C-E8E935CC585F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +93,7 @@ Global
 		{3E30A185-A1E5-4986-BF53-332C35ABCB09} = {3034B2D3-1F4C-4C1C-A2F8-A4AD22FFA72B}
 		{18BC816B-A02D-4F36-8FA4-CDB173D909F0} = {3034B2D3-1F4C-4C1C-A2F8-A4AD22FFA72B}
 		{8B127929-FC38-41C2-98A5-0CE74A0F98D2} = {A766FCFD-64C2-43C9-BC49-E32AAC6FEEF9}
+		{93B8BF9B-A286-45C1-AA8C-E8E935CC585F} = {3034B2D3-1F4C-4C1C-A2F8-A4AD22FFA72B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94492AF3-60CB-456F-AB2F-15377D25CEDA}

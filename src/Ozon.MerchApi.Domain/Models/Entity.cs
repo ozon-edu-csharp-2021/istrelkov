@@ -10,7 +10,7 @@ namespace Ozon.MerchApi.Domain.Models
         private List<INotification> _domainEvents;
         private int? _requestedHashCode;
         public IReadOnlyCollection<INotification> DomainEvents => _domainEvents?.AsReadOnly();
-        public virtual int Id { get; protected set; }
+        public virtual long Id { get; protected set; }
 
         public static bool operator !=(Entity left, Entity right) => !(left == right);
 
@@ -89,6 +89,14 @@ namespace Ozon.MerchApi.Domain.Models
         public void RemoveDomainEvent(INotification eventItem)
         {
             _domainEvents?.Remove(eventItem);
+        }
+
+        public void SetId(long id)
+        {
+            if (IsTransient())
+            {
+                Id = id;
+            }
         }
     }
 }
